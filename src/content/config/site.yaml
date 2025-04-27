@@ -1,0 +1,28 @@
+# AstroLinks Profile Configuration
+
+# Profile Information
+profile:
+  name: "Jane Doe"
+  image: "/images/profile.svg"
+
+# Social Media Links
+socialLinks:
+  - platform: "twitter"
+    url: "https://twitter.com/"
+  - platform: "instagram"
+    url: "https://instagram.com/"
+  - platform: "github"
+    url: "https://github.com/"
+  - platform: "linkedin"
+    url: "https://linkedin.com/"
+
+# Personal Links
+links:
+  - title: "My Portfolio Website"
+    url: "https://example.com"
+  - title: "My Blog"
+    url: "https://example.com/blog"
+  - title: "Latest Project"
+    url: "https://example.com/project"
+  - title: "Contact Me"
+    url: "mailto:contact@example.com" 

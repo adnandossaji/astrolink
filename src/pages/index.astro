@@ -3,33 +3,19 @@ import Layout from '../layouts/Layout.astro';
 import Profile from '../components/Profile.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import LinksList from '../components/LinksList.astro';
+import { getEntry } from 'astro:content';
 
-// Sample profile data
-const profileData = {
-	name: "Jane Doe",
-	image: "/images/profile.svg",
-};
-
-// Sample social links
-const socialLinks = [
-	{ platform: "twitter", url: "https://twitter.com/" },
-	{ platform: "instagram", url: "https://instagram.com/" },
-	{ platform: "github", url: "https://github.com/" },
-	{ platform: "linkedin", url: "https://linkedin.com/" },
-];
-
-// Sample links
-const links = [
-	{ title: "My Portfolio Website", url: "https://example.com" },
-	{ title: "My Blog", url: "https://example.com/blog" },
-	{ title: "Latest Project", url: "https://example.com/project" },
-	{ title: "Contact Me", url: "mailto:contact@example.com" },
-];
+// Load site configuration data from the content collection
+const siteConfig = await getEntry('config', 'site');
+if (!siteConfig) {
+	throw new Error('Site configuration not found!');
+}
+const { profile, socialLinks, links } = siteConfig.data;
 ---
 
-<Layout title={`${profileData.name} | AstroLinks`}>
+<Layout title={`${profile.name} | AstroLinks`}>
 	<div class="container">
-		<Profile name={profileData.name} image={profileData.image} />
+		<Profile name={profile.name} image={profile.image} />
 		<SocialLinks links={socialLinks} />
 		<LinksList links={links} />
 	</div>
