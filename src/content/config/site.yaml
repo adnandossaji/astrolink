@@ -5,6 +5,9 @@ profile:
   name: "Jane Doe"
   image: "/images/profile.svg"
 
+# Theme (options: light, dark, sunset, earthy, sunrise)
+theme: "sunset"
+
 # Social Media Links
 socialLinks:
   - platform: "twitter"

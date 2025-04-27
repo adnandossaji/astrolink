@@ -10,10 +10,10 @@ const siteConfig = await getEntry('config', 'site');
 if (!siteConfig) {
 	throw new Error('Site configuration not found!');
 }
-const { profile, socialLinks, links } = siteConfig.data;
+const { profile, socialLinks, links, theme } = siteConfig.data;
 ---
 
-<Layout title={`${profile.name} | AstroLinks`}>
+<Layout title={`${profile.name} | AstroLinks`} theme={theme}>
 	<div class="container">
 		<Profile name={profile.name} image={profile.image} />
 		<SocialLinks links={socialLinks} />

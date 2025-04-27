@@ -1,0 +1,27 @@
+---
+import { themeStyles, type ThemeType } from '../styles/themes';
+
+interface Props {
+  theme: ThemeType;
+}
+
+const { theme } = Astro.props;
+const currentTheme = themeStyles[theme];
+
+// Create an object with CSS custom property names (with double hyphens)
+const cssVars = {
+  '--primaryColor': currentTheme.primaryColor,
+  '--secondaryColor': currentTheme.secondaryColor,
+  '--backgroundColor': currentTheme.backgroundColor,
+  '--cardBackground': currentTheme.cardBackground,
+  '--textColor': currentTheme.textColor,
+  '--textSecondary': currentTheme.textSecondary,
+  '--hoverColor': currentTheme.hoverColor,
+  '--borderColor': currentTheme.borderColor,
+  '--shadowColor': currentTheme.shadowColor
+};
+---
+
+<style define:vars={cssVars} is:global>
+  /* Theme variables are injected via define:vars */
+</style> 

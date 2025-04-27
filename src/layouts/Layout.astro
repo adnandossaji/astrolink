@@ -1,13 +1,18 @@
 ---
+import { type ThemeType } from '../styles/themes';
+import ThemeDebug from '../components/ThemeDebug.astro';
+import '../styles/global.css';
+
 interface Props {
   title: string;
+  theme?: ThemeType;
 }
 
-const { title } = Astro.props;
+const { title, theme = 'light' } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme={theme}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +21,7 @@ const { title } = Astro.props;
     <title>{title}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <ThemeDebug theme={theme} />
   </head>
   <body>
     <main>
@@ -26,82 +32,3 @@ const { title } = Astro.props;
     </footer>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --primary-color: #5046e5;
-    --secondary-color: #6c63ff;
-    --background-color: #f5f7fa;
-    --card-background: #ffffff;
-    --text-color: #333333;
-    --text-secondary: #666666;
-    --hover-color: #4338ca;
-    --border-color: #e2e8f0;
-    --shadow-color: rgba(0, 0, 0, 0.05);
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  main {
-    max-width: 680px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-    flex-grow: 1;
-  }
-
-  footer {
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    border-top: 1px solid var(--border-color);
-  }
-
-  footer a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  footer a:hover {
-    text-decoration: underline;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  img {
-    max-width: 100%;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --primary-color: #6c63ff;
-      --secondary-color: #8b85ff;
-      --background-color: #121212;
-      --card-background: #1e1e1e;
-      --text-color: #e2e2e2;
-      --text-secondary: #a0a0a0;
-      --hover-color: #7c74ff;
-      --border-color: #2a2a2a;
-      --shadow-color: rgba(0, 0, 0, 0.2);
-    }
-  }
-</style> 

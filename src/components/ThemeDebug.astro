@@ -1,0 +1,44 @@
+---
+import { themeStyles, type ThemeType } from '../styles/themes';
+
+interface Props {
+  theme: ThemeType;
+}
+
+const { theme } = Astro.props;
+const currentTheme = themeStyles[theme];
+---
+
+<script is:inline define:vars={{ theme, styles: JSON.stringify(currentTheme) }}>
+  console.log('Theme Debug:', theme, styles);
+  
+  // Apply theme directly to document root
+  document.documentElement.style.setProperty('--primaryColor', JSON.parse(styles).primaryColor);
+  document.documentElement.style.setProperty('--secondaryColor', JSON.parse(styles).secondaryColor);
+  document.documentElement.style.setProperty('--backgroundColor', JSON.parse(styles).backgroundColor);
+  document.documentElement.style.setProperty('--cardBackground', JSON.parse(styles).cardBackground);
+  document.documentElement.style.setProperty('--textColor', JSON.parse(styles).textColor);
+  document.documentElement.style.setProperty('--textSecondary', JSON.parse(styles).textSecondary);
+  document.documentElement.style.setProperty('--hoverColor', JSON.parse(styles).hoverColor);
+  document.documentElement.style.setProperty('--borderColor', JSON.parse(styles).borderColor);
+  document.documentElement.style.setProperty('--shadowColor', JSON.parse(styles).shadowColor);
+</script>
+
+<!-- Visual theme indicator for debugging -->
+<div class="theme-indicator">
+  Theme: {theme}
+</div>
+
+<style>
+  .theme-indicator {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: var(--primaryColor);
+    color: white;
+    padding: 4px 8px;
+    font-size: 12px;
+    z-index: 1000;
+    border-bottom-left-radius: 4px;
+  }
+</style> 

@@ -1,0 +1,64 @@
+/* Global styles and defaults */
+:root {
+  /* Default light theme variables as fallback - will be overridden by theme selection */
+  --primaryColor: #5046e5;
+  --secondaryColor: #6c63ff;
+  --backgroundColor: #f5f7fa;
+  --cardBackground: #ffffff;
+  --textColor: #333333;
+  --textSecondary: #666666;
+  --hoverColor: #4338ca;
+  --borderColor: #e2e8f0;
+  --shadowColor: rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  flex-grow: 1;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--textSecondary);
+  border-top: 1px solid var(--borderColor);
+}
+
+footer a {
+  color: var(--primaryColor);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+} 

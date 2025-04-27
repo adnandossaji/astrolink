@@ -9,6 +9,7 @@ export const collections = {
         name: z.string(),
         image: z.string(),
       }),
+      theme: z.enum(['light', 'dark', 'sunset', 'earthy', 'sunrise']).default('light'),
       socialLinks: z.array(
         z.object({
           platform: z.string(),
