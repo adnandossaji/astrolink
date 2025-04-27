@@ -1,0 +1,27 @@
+---
+import LinkButton from './LinkButton.astro';
+
+interface Link {
+  title: string;
+  url: string;
+}
+
+interface Props {
+  links: Link[];
+}
+
+const { links } = Astro.props;
+---
+
+<div class="links-container">
+  {links.map(link => <LinkButton title={link.title} url={link.url} />)}
+</div>
+
+<style>
+  .links-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+</style> 

@@ -1,4 +1,65 @@
-# Astro Starter Kit: Minimal
+# AstroLinks
+
+A modern, responsive link-in-bio website built with Astro.js.
+
+## Features
+
+- Clean, modern UI with light/dark mode support
+- Profile picture and name display
+- Social media icons
+- Custom link buttons with share functionality
+- Responsive design for all devices
+- Fast loading and accessibility focused
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+   ```
+   git clone https://github.com/username/astro-links.git
+   cd astro-links
+   ```
+
+2. Install dependencies
+   ```
+   npm install
+   # or
+   yarn
+   ```
+
+3. Start the development server
+   ```
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Build for production
+   ```
+   npm run build
+   # or
+   yarn build
+   ```
+
+## Customization
+
+- Edit `src/pages/index.astro` to customize your profile info, social links, and link buttons
+- Replace the profile image in `public/images/profile.svg` with your own
+- Modify colors and styles in `src/layouts/Layout.astro`
+
+## License
+
+MIT
+
+## Credits
+
+Built with [Astro](https://astro.build) - the all-in-one web framework designed for speed.
 
 ```sh
 yarn create astro@latest -- --template minimal

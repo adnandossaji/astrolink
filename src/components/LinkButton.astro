@@ -1,0 +1,215 @@
+---
+interface Props {
+  title: string;
+  url: string;
+}
+
+const { title, url } = Astro.props;
+---
+
+<div class="link-button-container">
+  <a href={url} target="_blank" rel="noopener noreferrer" class="link-button">
+    <span class="link-title">{title}</span>
+    <button class="share-button" aria-label="Share this link" data-link={url} data-title={title}>
+      <i class="fas fa-share-alt"></i>
+    </button>
+  </a>
+</div>
+
+<!-- Share Modal (Hidden by default) -->
+<div id="shareModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3>Share this link</h3>
+    <div class="modal-link-container">
+      <input type="text" id="shareLink" readonly />
+      <button id="copyLinkBtn">
+        <i class="fas fa-copy"></i> Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .link-button-container {
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  .link-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0.75rem;
+    background-color: var(--card-background);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .link-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--shadow-color);
+  }
+
+  .link-title {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .share-button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.875rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .share-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background-color: var(--card-background);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close-modal:hover {
+    color: var(--text-color);
+  }
+
+  .modal h3 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .modal-link-container {
+    display: flex;
+    margin-top: 1rem;
+  }
+
+  .modal-link-container input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem 0 0 0.5rem;
+    font-size: 0.875rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  .modal-link-container button {
+    padding: 0.75rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0 0.5rem 0.5rem 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .modal-link-container button:hover {
+    background-color: var(--hover-color);
+  }
+</style>
+
+<script>
+  // Initialize share functionality once the DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('shareModal');
+    const shareBtns = document.querySelectorAll('.share-button');
+    const closeBtn = document.querySelector('.close-modal');
+    const shareLinkInput = document.getElementById('shareLink');
+    const copyBtn = document.getElementById('copyLinkBtn');
+
+    // Open modal when a share button is clicked
+    shareBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const link = btn.getAttribute('data-link');
+        if (shareLinkInput && link) {
+          shareLinkInput.value = link;
+        }
+        if (modal) {
+          modal.style.display = 'flex';
+        }
+      });
+    });
+
+    // Close modal when close button is clicked
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        if (modal) {
+          modal.style.display = 'none';
+        }
+      });
+    }
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Copy link when copy button is clicked
+    if (copyBtn && shareLinkInput) {
+      copyBtn.addEventListener('click', () => {
+        shareLinkInput.select();
+        document.execCommand('copy');
+        
+        // Change button text temporarily to indicate successful copy
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          copyBtn.innerHTML = originalText;
+        }, 2000);
+      });
+    }
+  });
+</script> 
